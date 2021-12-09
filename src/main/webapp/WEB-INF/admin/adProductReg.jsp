@@ -59,24 +59,35 @@
 				myform.photo.value = "noimage";
 			}
 			else{
-				var fileSize = document.getEleById("file").files[0].size;
+				var fileLength = document.getElementById("fName").files.length;
+				var fileSize = 0;
 				
-				if(uExt != "JPG" && uExt != "GIF" && uExt != "PNG") {
-		    		alert("업로드 가능한 파일은 'JPG/GIF/PNG");
+	    	for(var i=0; i<fileLength; i++) {
+	    		var fName = document.getElementById("fName").files[i].name;
+	        var ext = fName.substring(fName.lastIndexOf(".")+1);
+	        var uExt = ext.toUpperCase();
+	        fileSize += document.getElementById("fName").files[i].size;
+	        
+		    	if(uExt != "ZIP" && uExt != "JPG" && uExt != "GIF" && uExt != "PNG") {
+		    		alert("업로드 가능한 파일은 'ZIP/JPG/GIF/PNG'");
 		    		return false;
 		    	}
 		    	else if(fName.indexOf(" ") != -1) {
 		    		alert("업로드할 파일명에는 공백을 포함하실수 없습니다.");
 		    		return false;
 		    	}
-		    	else if(fileSize > maxSize) {
+	    	}
+		    	
+		   	if(fileSize > maxSize) {
 		    		alert("업로드할 파일의 크기는 5MByte 이하여야 합니다.");
 		    		return false;
-		    	}
- 				}
-		    	myform.submit();
-			}
+		    }
+		    else{
+			    myform.submit();
+		    }
+ 			}
 		}
+	}
 	// 현재 등록중인 상품이 동일한 분류로 이미 등록되어있는지 검사
 	function productCheck() {
 		var mainCategory= document.getElementById("mainCategory");
@@ -229,7 +240,7 @@
     </div>
 			<div  class="form-group">
       	<label for="fName">상품 사진(파일용량:5MByte이내) : </label>
-     	 <input type="file" name="fName" id="file" multiple class="form-control-file border"/>
+     	 <input type="file" name="fName" id="fName" multiple class="form-control-file border"/>
 	    </div>
 	    <button type="button" class="btn btn-secondary" onclick="fCheck()">상품 등록</button>
 	    <button type="button" class="btn btn-secondary" onclick="location.href='${ctp}/adContent.ad';">돌아가기</button>
