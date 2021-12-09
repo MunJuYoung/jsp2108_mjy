@@ -1,0 +1,15 @@
+회원가입 : 
+데이터베이스 : java05_mjy
+테이블명 : memeber
+
+작업폴더 : member
+
+클래스파일 - VO,DAO,Controller(*.mem)
+
+-View파일 
+로그인 화면: memLogin.jsp
+회원가입 : memJoin.jsp
+로그인메인 : memMain.jsp
+회원관리 : 
+	회원정보수정 : memeUpdate.jsp
+	회원탈퇴 : memDelete.jsp
